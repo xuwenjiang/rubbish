@@ -1,0 +1,87 @@
+swagger: '2.0'
+info:
+  description: Stripe API tools
+  version: 1.0.0
+  title: stripe-tools
+  contact:
+    email: james.lee@missguided.com
+
+paths:
+  /source:
+    post:
+      summary: Create a stipe source token
+      tags:
+        - Stripe Source
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        description: Third party API key
+        name: X-API-KEY
+        type: string
+        required: true
+      - in: body
+        name: createSource
+        description: Create a stripe source token
+        schema:
+          $ref: '#/definitions/source'
+      responses:
+        201:
+          description: item created
+        422:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+
+definitions:
+  source:
+    type: object
+    properties:
+      type:
+        description: source type
+        type: string
+        example: card
+      owner:
+        $ref: '#/definitions/Owner'
+      card:
+        $ref: '#/definitions/Card'
+  Owner:
+    type: object
+    required:
+      - name
+      - email
+    properties:
+      name:
+        type: string
+        example: james
+      email:
+        type: string
+        example: james@swagger.com
+  Card:
+    type: object
+    required:
+      - number
+      - cvc
+      - exp_month
+      - exp_year
+    properties:
+      number:
+        type: number
+        example: 999999999999
+      cvc:
+        type: number
+        example: 098
+      exp_month:
+        type: number
+        example: 12
+      exp_year:
+        type: number
+        example: 2022
+      
+# Added by API Auto Mocking Plugin
+host: localhost
+basePath: /stripe
+schemes:
+ - http

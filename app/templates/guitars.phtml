@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Wenjiang's experiment</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+<body>
+<h1>All Guitars</h1>
+<?php if (count($guitars) > 0): ?>
+    <table class="pure-table">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        <?php $odd = true;
+        foreach ($guitars as $_guitar): ?>
+            <tr <?= $odd ? "class=\"pure-table-odd\"" : ""; ?>>
+                <td><?= $_guitar->getName() ?></td>
+                <td><?= $_guitar->getPrice() ?></td>
+            </tr>
+            <?php $odd = $odd ? false : true; ?>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <p>No guitar</p>
+<?php endif; ?>
+
+</body>
+</html>
